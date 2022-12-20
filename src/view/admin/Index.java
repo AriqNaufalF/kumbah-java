@@ -98,7 +98,7 @@ public class Index extends javax.swing.JFrame {
         editOrderBtn.setBackground(new java.awt.Color(178, 173, 245));
         editOrderBtn.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         editOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
-        editOrderBtn.setText("Edit Order");
+        editOrderBtn.setText("Orders");
         editOrderBtn.setBorder(null);
         editOrderBtn.setBorderPainted(false);
         editOrderBtn.setContentAreaFilled(false);

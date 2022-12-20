@@ -6,15 +6,16 @@ package controller;
 
 import java.awt.Component;
 import java.sql.*;
+
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ariqn
  */
-public class ConnectDB {
+public class Controller {
 
-    public static Connection kumbahDB() {
+    protected static Connection kumbahDB() {
         Connection conn = null;
 
         try {
@@ -25,7 +26,7 @@ public class ConnectDB {
         return conn;
     }
 
-    public static Connection kumbahDB(Component parent) {
+    protected static Connection kumbahDB(Component parent) {
         Connection conn = null;
 
         try {

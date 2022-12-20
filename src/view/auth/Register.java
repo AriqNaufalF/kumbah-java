@@ -4,6 +4,8 @@
  */
 package view.auth;
 
+import controller.RegisterController;
+
 /**
  *
  * @author ariqn
@@ -27,7 +29,6 @@ public class Register extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -82,6 +83,11 @@ public class Register extends javax.swing.JFrame {
         registerBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         registerBtn.setForeground(new java.awt.Color(255, 255, 255));
         registerBtn.setText("Register");
+        registerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerBtnActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -173,11 +179,18 @@ public class Register extends javax.swing.JFrame {
     private void toLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toLoginBtnActionPerformed
         // TODO add your handling code here:
         Login app = new Login();
-        
+
         this.dispose();
         app.setSize(960, 540);
         app.setVisible(true);
     }//GEN-LAST:event_toLoginBtnActionPerformed
+
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        RegisterController.registerUser(this,
+                nameField.getText(),
+                emailField.getText(),
+                String.valueOf(passField.getPassword()));
+    }//GEN-LAST:event_registerBtnActionPerformed
 
     /**
      * @param args the command line arguments
