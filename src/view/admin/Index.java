@@ -4,7 +4,9 @@
  */
 package view.admin;
 
+import controller.LoginController;
 import java.awt.CardLayout;
+import model.Karyawan;
 
 /**
  *
@@ -16,8 +18,18 @@ public class Index extends javax.swing.JFrame {
      * Creates new form Index
      */
     CardLayout cardLayout;
-
+    private Karyawan currentKaryawan;
+    
     public Index() {
+        currentKaryawan = new Karyawan(0, "Unknown", "Unknown", "");
+        initComponents();
+        cardLayout = (CardLayout) mainContent.getLayout();
+        this.setLocationRelativeTo(null);
+        this.setTitle("Kumbah");
+    }
+    
+    public Index(Karyawan currentKaryawan) {
+        this.currentKaryawan = currentKaryawan;
         initComponents();
         cardLayout = (CardLayout) mainContent.getLayout();
         this.setLocationRelativeTo(null);
@@ -315,17 +327,17 @@ public class Index extends javax.swing.JFrame {
     private void addOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderBtnActionPerformed
         cardLayout.show(mainContent, "addOrderPnl");
     }//GEN-LAST:event_addOrderBtnActionPerformed
-
+    
     private void serviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceBtnActionPerformed
         cardLayout.show(mainContent, "servicePnl");
     }//GEN-LAST:event_serviceBtnActionPerformed
-
+    
     private void editOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderBtnActionPerformed
         cardLayout.show(mainContent, "editOrderPnl");
     }//GEN-LAST:event_editOrderBtnActionPerformed
-
+    
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        // TODO add your handling code here:
+        LoginController.logout(this, currentKaryawan);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
