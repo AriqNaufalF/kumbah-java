@@ -19,7 +19,7 @@ public class Index extends javax.swing.JFrame {
      */
     CardLayout cardLayout;
     private Karyawan currentKaryawan;
-    
+
     public Index() {
         currentKaryawan = new Karyawan(0, "Unknown", "Unknown", "");
         initComponents();
@@ -27,7 +27,7 @@ public class Index extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Kumbah");
     }
-    
+
     public Index(Karyawan currentKaryawan) {
         this.currentKaryawan = currentKaryawan;
         initComponents();
@@ -66,6 +66,8 @@ public class Index extends javax.swing.JFrame {
         editOrderPnl = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         servicePnl = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -267,17 +269,51 @@ public class Index extends javax.swing.JFrame {
         jLabel3.setText("Edit Order");
         jPanel2.add(jLabel3, java.awt.BorderLayout.CENTER);
 
+        jTable1.setBackground(new java.awt.Color(255, 255, 255));
+        jTable1.setForeground(new java.awt.Color(0, 0, 0));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Transaction Date", "Finished Date", "Customer", "Employee", "Total Price", "Quantity", "Service"
+            }
+        ));
+        jTable1.setGridColor(new java.awt.Color(248, 250, 252));
+        jTable1.setSelectionBackground(new java.awt.Color(226, 232, 240));
+        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        jTable1.setShowHorizontalLines(true);
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Transaction Date");
+            jTable1.getColumnModel().getColumn(1).setHeaderValue("Finished Date");
+            jTable1.getColumnModel().getColumn(2).setHeaderValue("Customer");
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("Employee");
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("Total Price");
+            jTable1.getColumnModel().getColumn(5).setHeaderValue("Quantity");
+            jTable1.getColumnModel().getColumn(6).setHeaderValue("Service");
+        }
+
         javax.swing.GroupLayout editOrderPnlLayout = new javax.swing.GroupLayout(editOrderPnl);
         editOrderPnl.setLayout(editOrderPnlLayout);
         editOrderPnlLayout.setHorizontalGroup(
             editOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+            .addGroup(editOrderPnlLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         editOrderPnlLayout.setVerticalGroup(
             editOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editOrderPnlLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 440, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 50, Short.MAX_VALUE))
         );
 
         mainContent.add(editOrderPnl, "editOrderPnl");
@@ -327,15 +363,15 @@ public class Index extends javax.swing.JFrame {
     private void addOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderBtnActionPerformed
         cardLayout.show(mainContent, "addOrderPnl");
     }//GEN-LAST:event_addOrderBtnActionPerformed
-    
+
     private void serviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceBtnActionPerformed
         cardLayout.show(mainContent, "servicePnl");
     }//GEN-LAST:event_serviceBtnActionPerformed
-    
+
     private void editOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderBtnActionPerformed
         cardLayout.show(mainContent, "editOrderPnl");
     }//GEN-LAST:event_editOrderBtnActionPerformed
-    
+
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         LoginController.logout(this, currentKaryawan);
     }//GEN-LAST:event_logoutBtnActionPerformed
@@ -391,7 +427,9 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel mainContent;
     private javax.swing.JTextField nameForm;

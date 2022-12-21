@@ -4,6 +4,7 @@
  */
 package controller;
 
+import com.password4j.Password;
 import helper.FormValidator;
 import javax.swing.JFrame;
 import java.sql.*;
@@ -61,7 +62,7 @@ public class LoginController extends Controller {
             }
 
             Optional<Karyawan> userOptional = Optional.ofNullable(user);
-            if (userOptional.map(Karyawan::getPassword).orElse("").equals(password)) {
+            if (checkPassword(userOptional, password)) {
                 JOptionPane.showMessageDialog(parent, "Welcome " + user.getName() + "!");
                 Index index = new Index(user);
 
@@ -77,6 +78,17 @@ public class LoginController extends Controller {
             JOptionPane.showMessageDialog(parent, e.getMessage(), "Database error",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private static boolean checkPassword(Optional<Karyawan> userOptional, String password) {
+        boolean verified;
+        String passwordFromDB = userOptional.map(Karyawan::getPassword).orElse("");
+        verified = passwordFromDB.isEmpty()
+                ? false
+                : Password.check(password, passwordFromDB)
+                        .addPepper("kumbah").withBcrypt();
+
+        return verified;
     }
 
     private static void goToLogin(JFrame jFrame) {

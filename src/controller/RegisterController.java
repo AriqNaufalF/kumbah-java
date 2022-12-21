@@ -1,5 +1,7 @@
 package controller;
 
+import com.password4j.Hash;
+import com.password4j.Password;
 import helper.FormValidator;
 import javax.swing.JFrame;
 import java.sql.*;
@@ -20,9 +22,9 @@ public class RegisterController extends Controller {
         Connection conn = kumbahDB(jFrame);
         FormValidator validator = new FormValidator();
 
-        boolean[] validated = { validator.patternMatches(name, "[a-zA-Z\\.\\s]{3,255}"),
-                validator.patternMatches(email, FormValidator.EMAIL_REGEX),
-                validator.patternMatches(password, FormValidator.PASSWORD_REGEX) };
+        boolean[] validated = {validator.patternMatches(name, "[a-zA-Z\\.\\s]{3,255}"),
+            validator.patternMatches(email, FormValidator.EMAIL_REGEX),
+            validator.patternMatches(password, FormValidator.PASSWORD_REGEX)};
         String message = "";
         if (!validated[0]) {
             message = "Name contains only letters, minimum 3 characters long and maximum 255 characters long";
@@ -36,11 +38,12 @@ public class RegisterController extends Controller {
             validator.validation(jFrame, message);
         } else {
             try {
+                Hash hash = Password.hash(password).addPepper("kumbah").withBcrypt();
                 String insertQuery = "INSERT INTO karyawan(name, email, password) VALUES(?, ?, ?)";
                 PreparedStatement ps = conn.prepareStatement(insertQuery);
                 ps.setString(1, name);
                 ps.setString(2, email);
-                ps.setString(3, password);
+                ps.setString(3, hash.getResult());
 
                 int rowAffected = ps.executeUpdate();
                 if (rowAffected > 0) {
