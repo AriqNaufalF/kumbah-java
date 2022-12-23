@@ -23,6 +23,7 @@ public class Index extends javax.swing.JFrame {
     public Index() {
         currentKaryawan = new Karyawan(0, "Unknown", "Unknown", "");
         initComponents();
+        transactionDateField.setEditable(false);
         cardLayout = (CardLayout) mainContent.getLayout();
         this.setLocationRelativeTo(null);
         this.setTitle("Kumbah");
@@ -31,6 +32,7 @@ public class Index extends javax.swing.JFrame {
     public Index(Karyawan currentKaryawan) {
         this.currentKaryawan = currentKaryawan;
         initComponents();
+        transactionDateField.setEditable(false);
         cardLayout = (CardLayout) mainContent.getLayout();
         this.setLocationRelativeTo(null);
         this.setTitle("Kumbah");
@@ -63,14 +65,29 @@ public class Index extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         serviceForm = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        editOrderPnl = new javax.swing.JPanel();
+        orderPnl = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        orderTable = new javax.swing.JTable();
+        transactionDateField = new javax.swing.JTextField();
+        customerField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         servicePnl = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        serviceTable = new javax.swing.JTable();
+        addServiceBtn = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        serviceNameField = new javax.swing.JTextField();
+        servicePriceField = new javax.swing.JTextField();
+        editServiceBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,7 +238,7 @@ public class Index extends javax.swing.JFrame {
         addOrderPnl.setLayout(addOrderPnlLayout);
         addOrderPnlLayout.setHorizontalGroup(
             addOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
             .addGroup(addOrderPnlLayout.createSequentialGroup()
                 .addGap(177, 177, 177)
                 .addGroup(addOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -258,20 +275,22 @@ public class Index extends javax.swing.JFrame {
 
         mainContent.add(addOrderPnl, "addOrderPnl");
 
-        editOrderPnl.setBackground(new java.awt.Color(249, 249, 249));
+        orderPnl.setBackground(new java.awt.Color(249, 249, 249));
+
+        jScrollPane3.setBackground(new java.awt.Color(249, 249, 249));
+        jScrollPane3.setForeground(new java.awt.Color(249, 249, 249));
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanel2.setBackground(new java.awt.Color(249, 249, 249));
-        jPanel2.setLayout(new java.awt.BorderLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(103, 98, 211));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Edit Order");
-        jPanel2.add(jLabel3, java.awt.BorderLayout.CENTER);
+        jLabel3.setText("Orders");
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        orderTable.setBackground(new java.awt.Color(249, 249, 249));
+        orderTable.setForeground(new java.awt.Color(0, 0, 0));
+        orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -282,64 +301,217 @@ public class Index extends javax.swing.JFrame {
                 "Transaction Date", "Finished Date", "Customer", "Employee", "Total Price", "Quantity", "Service"
             }
         ));
-        jTable1.setGridColor(new java.awt.Color(248, 250, 252));
-        jTable1.setSelectionBackground(new java.awt.Color(226, 232, 240));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setShowHorizontalLines(true);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Transaction Date");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Finished Date");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Customer");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Employee");
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("Total Price");
-            jTable1.getColumnModel().getColumn(5).setHeaderValue("Quantity");
-            jTable1.getColumnModel().getColumn(6).setHeaderValue("Service");
-        }
+        jScrollPane1.setViewportView(orderTable);
 
-        javax.swing.GroupLayout editOrderPnlLayout = new javax.swing.GroupLayout(editOrderPnl);
-        editOrderPnl.setLayout(editOrderPnlLayout);
-        editOrderPnlLayout.setHorizontalGroup(
-            editOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-            .addGroup(editOrderPnlLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        transactionDateField.setBackground(new java.awt.Color(248, 250, 252));
+        transactionDateField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        transactionDateField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transactionDateFieldActionPerformed(evt);
+            }
+        });
+
+        customerField.setBackground(new java.awt.Color(248, 250, 252));
+        customerField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        customerField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Transaction Date");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Customer Name");
+
+        jButton2.setBackground(new java.awt.Color(137, 128, 245));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Finish");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(transactionDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
-        editOrderPnlLayout.setVerticalGroup(
-            editOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editOrderPnlLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(transactionDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 37, Short.MAX_VALUE))
         );
 
-        mainContent.add(editOrderPnl, "editOrderPnl");
+        jScrollPane3.setViewportView(jPanel2);
+
+        javax.swing.GroupLayout orderPnlLayout = new javax.swing.GroupLayout(orderPnl);
+        orderPnl.setLayout(orderPnlLayout);
+        orderPnlLayout.setHorizontalGroup(
+            orderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
+        );
+        orderPnlLayout.setVerticalGroup(
+            orderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+        );
+
+        mainContent.add(orderPnl, "orderPnl");
 
         servicePnl.setBackground(new java.awt.Color(249, 249, 249));
 
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         jPanel3.setBackground(new java.awt.Color(249, 249, 249));
-        jPanel3.setLayout(new java.awt.BorderLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(103, 98, 211));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Service");
-        jPanel3.add(jLabel4, java.awt.BorderLayout.CENTER);
+
+        serviceTable.setBackground(new java.awt.Color(255, 255, 255));
+        serviceTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        serviceTable.setForeground(new java.awt.Color(0, 0, 0));
+        serviceTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Price"
+            }
+        ));
+        serviceTable.setGridColor(new java.awt.Color(248, 250, 252));
+        serviceTable.setSelectionBackground(new java.awt.Color(226, 232, 240));
+        serviceTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        serviceTable.setShowHorizontalLines(true);
+        jScrollPane2.setViewportView(serviceTable);
+
+        addServiceBtn.setBackground(new java.awt.Color(137, 128, 245));
+        addServiceBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addServiceBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addServiceBtn.setText("Add Service");
+        addServiceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addServiceBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Service Name");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Price");
+
+        serviceNameField.setBackground(new java.awt.Color(248, 250, 252));
+        serviceNameField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
+        servicePriceField.setBackground(new java.awt.Color(248, 250, 252));
+        servicePriceField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        servicePriceField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                servicePriceFieldActionPerformed(evt);
+            }
+        });
+
+        editServiceBtn.setBackground(new java.awt.Color(137, 128, 245));
+        editServiceBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        editServiceBtn.setForeground(new java.awt.Color(255, 255, 255));
+        editServiceBtn.setText("Edit Service");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 11, Short.MAX_VALUE)))
+                .addGap(30, 30, 30))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(serviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(servicePriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(serviceNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(servicePriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+
+        jScrollPane4.setViewportView(jPanel3);
 
         javax.swing.GroupLayout servicePnlLayout = new javax.swing.GroupLayout(servicePnl);
         servicePnl.setLayout(servicePnlLayout);
         servicePnlLayout.setHorizontalGroup(
             servicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
         );
         servicePnlLayout.setVerticalGroup(
             servicePnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(servicePnlLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 440, Short.MAX_VALUE))
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
 
         mainContent.add(servicePnl, "servicePnl");
@@ -350,7 +522,7 @@ public class Index extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,12 +541,31 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_serviceBtnActionPerformed
 
     private void editOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderBtnActionPerformed
-        cardLayout.show(mainContent, "editOrderPnl");
+        cardLayout.show(mainContent, "orderPnl");
     }//GEN-LAST:event_editOrderBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         LoginController.logout(this, currentKaryawan);
     }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void transactionDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionDateFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_transactionDateFieldActionPerformed
+
+    private void customerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerFieldActionPerformed
+
+    private void servicePriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicePriceFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_servicePriceFieldActionPerformed
+
+    private void addServiceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addServiceBtnActionPerformed
+        // TODO add your handling code here:
+        AddService addService = new AddService();
+
+        addService.setVisible(true);
+    }//GEN-LAST:event_addServiceBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -414,29 +605,44 @@ public class Index extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addOrderBtn;
     private javax.swing.JPanel addOrderPnl;
+    private javax.swing.JButton addServiceBtn;
+    private javax.swing.JTextField customerField;
     private javax.swing.JButton editOrderBtn;
-    private javax.swing.JPanel editOrderPnl;
+    private javax.swing.JButton editServiceBtn;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JPanel mainContent;
     private javax.swing.JTextField nameForm;
+    private javax.swing.JPanel orderPnl;
+    private javax.swing.JTable orderTable;
     private javax.swing.JButton serviceBtn;
     private javax.swing.JComboBox<String> serviceForm;
+    private javax.swing.JTextField serviceNameField;
     private javax.swing.JPanel servicePnl;
+    private javax.swing.JTextField servicePriceField;
+    private javax.swing.JTable serviceTable;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JTextField transactionDateField;
     private javax.swing.JTextField weightForm;
     // End of variables declaration//GEN-END:variables
 }
