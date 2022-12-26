@@ -5,8 +5,12 @@
 package view.admin;
 
 import controller.LoginController;
+import controller.ServiceController;
 import java.awt.CardLayout;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import model.Karyawan;
+import model.Layanan;
 
 /**
  *
@@ -19,7 +23,9 @@ public class Index extends javax.swing.JFrame {
      */
     CardLayout cardLayout;
     private Karyawan currentKaryawan;
-
+    private DefaultTableModel tableModel;
+    private String[][] rowData;
+    
     public Index() {
         currentKaryawan = new Karyawan(0, "Unknown", "Unknown", "");
         initComponents();
@@ -28,7 +34,7 @@ public class Index extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Kumbah");
     }
-
+    
     public Index(Karyawan currentKaryawan) {
         this.currentKaryawan = currentKaryawan;
         initComponents();
@@ -88,6 +94,7 @@ public class Index extends javax.swing.JFrame {
         serviceNameField = new javax.swing.JTextField();
         servicePriceField = new javax.swing.JTextField();
         editServiceBtn = new javax.swing.JButton();
+        refreshServiceBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -301,23 +308,18 @@ public class Index extends javax.swing.JFrame {
                 "Transaction Date", "Finished Date", "Customer", "Employee", "Total Price", "Quantity", "Service"
             }
         ));
+        orderTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                orderTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(orderTable);
 
         transactionDateField.setBackground(new java.awt.Color(248, 250, 252));
         transactionDateField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        transactionDateField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transactionDateFieldActionPerformed(evt);
-            }
-        });
 
         customerField.setBackground(new java.awt.Color(248, 250, 252));
         customerField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        customerField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerFieldActionPerformed(evt);
-            }
-        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -412,9 +414,17 @@ public class Index extends javax.swing.JFrame {
             }
         ));
         serviceTable.setGridColor(new java.awt.Color(248, 250, 252));
+        serviceTable.setRowHeight(48);
         serviceTable.setSelectionBackground(new java.awt.Color(226, 232, 240));
         serviceTable.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        serviceTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        serviceTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         serviceTable.setShowHorizontalLines(true);
+        serviceTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                serviceTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(serviceTable);
 
         addServiceBtn.setBackground(new java.awt.Color(137, 128, 245));
@@ -440,16 +450,28 @@ public class Index extends javax.swing.JFrame {
 
         servicePriceField.setBackground(new java.awt.Color(248, 250, 252));
         servicePriceField.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        servicePriceField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                servicePriceFieldActionPerformed(evt);
-            }
-        });
 
         editServiceBtn.setBackground(new java.awt.Color(137, 128, 245));
         editServiceBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         editServiceBtn.setForeground(new java.awt.Color(255, 255, 255));
         editServiceBtn.setText("Edit Service");
+        editServiceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editServiceBtnActionPerformed(evt);
+            }
+        });
+
+        refreshServiceBtn.setBackground(new java.awt.Color(0, 0, 0));
+        refreshServiceBtn.setForeground(new java.awt.Color(0, 0, 0));
+        refreshServiceBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/refresh.png"))); // NOI18N
+        refreshServiceBtn.setText("Refresh table");
+        refreshServiceBtn.setBorderPainted(false);
+        refreshServiceBtn.setContentAreaFilled(false);
+        refreshServiceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshServiceBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -460,8 +482,11 @@ public class Index extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(refreshServiceBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(editServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 11, Short.MAX_VALUE)))
@@ -485,7 +510,9 @@ public class Index extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addServiceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshServiceBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -535,37 +562,67 @@ public class Index extends javax.swing.JFrame {
     private void addOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderBtnActionPerformed
         cardLayout.show(mainContent, "addOrderPnl");
     }//GEN-LAST:event_addOrderBtnActionPerformed
-
+    
     private void serviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serviceBtnActionPerformed
+        String[] header = {"ID", "Name", "Price"};
+        
+        tableModel = new DefaultTableModel(rowData, header);
+        serviceTable.setModel(tableModel);
+        TableColumnModel columnModel = serviceTable.getColumnModel();
+
+//        set ukuran min dan max tabel
+        columnModel.getColumn(0).setMaxWidth(40);
+        
+        ServiceController.index(tableModel);
+        
         cardLayout.show(mainContent, "servicePnl");
     }//GEN-LAST:event_serviceBtnActionPerformed
-
+    
     private void editOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderBtnActionPerformed
         cardLayout.show(mainContent, "orderPnl");
     }//GEN-LAST:event_editOrderBtnActionPerformed
-
+    
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         LoginController.logout(this, currentKaryawan);
     }//GEN-LAST:event_logoutBtnActionPerformed
-
-    private void transactionDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionDateFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transactionDateFieldActionPerformed
-
-    private void customerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customerFieldActionPerformed
-
-    private void servicePriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servicePriceFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_servicePriceFieldActionPerformed
-
+    
     private void addServiceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addServiceBtnActionPerformed
         // TODO add your handling code here:
-        AddService addService = new AddService();
-
+        AddService addService = new AddService(currentKaryawan);
+        
         addService.setVisible(true);
     }//GEN-LAST:event_addServiceBtnActionPerformed
+    
+    private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
+        // TODO add your handling code here:
+        int row = orderTable.getSelectedRow();
+    }//GEN-LAST:event_orderTableMouseClicked
+    
+    private void serviceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serviceTableMouseClicked
+        // TODO add your handling code here:
+        int row = serviceTable.getSelectedRow();
+        
+        Layanan selectedData = ServiceController.getListLayanan().get(row);
+        
+        serviceNameField.setText(selectedData.getNama());
+        servicePriceField.setText(Long.toString(selectedData.getHarga()));
+    }//GEN-LAST:event_serviceTableMouseClicked
+    
+    private void editServiceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editServiceBtnActionPerformed
+        // TODO add your handling code here:
+        int row = serviceTable.getSelectedRow();
+        Layanan selectedData = ServiceController.getListLayanan().get(row);
+        
+        ServiceController.update(this, selectedData.getId(), serviceNameField.getText(), servicePriceField.getText(), tableModel);
+        
+        servicePriceField.setText("");
+        serviceNameField.setText("");
+    }//GEN-LAST:event_editServiceBtnActionPerformed
+    
+    private void refreshServiceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshServiceBtnActionPerformed
+        // TODO add your handling code here:
+        ServiceController.refresh(tableModel);
+    }//GEN-LAST:event_refreshServiceBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -635,6 +692,7 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JTextField nameForm;
     private javax.swing.JPanel orderPnl;
     private javax.swing.JTable orderTable;
+    private javax.swing.JButton refreshServiceBtn;
     private javax.swing.JButton serviceBtn;
     private javax.swing.JComboBox<String> serviceForm;
     private javax.swing.JTextField serviceNameField;
