@@ -5,12 +5,14 @@
 package view.admin;
 
 import controller.LoginController;
+import controller.OrderController;
 import controller.ServiceController;
 import java.awt.CardLayout;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import model.Karyawan;
 import model.Layanan;
+import model.OrderData;
 
 /**
  *
@@ -29,6 +31,7 @@ public class Index extends javax.swing.JFrame {
     public Index() {
         currentKaryawan = new Karyawan(0, "Unknown", "Unknown", "");
         initComponents();
+        OrderController.populateList(serviceForm);
         transactionDateField.setEditable(false);
         cardLayout = (CardLayout) mainContent.getLayout();
         this.setLocationRelativeTo(null);
@@ -38,6 +41,7 @@ public class Index extends javax.swing.JFrame {
     public Index(Karyawan currentKaryawan) {
         this.currentKaryawan = currentKaryawan;
         initComponents();
+        OrderController.populateList(serviceForm);
         transactionDateField.setEditable(false);
         cardLayout = (CardLayout) mainContent.getLayout();
         this.setLocationRelativeTo(null);
@@ -51,7 +55,8 @@ public class Index extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         sidebar = new javax.swing.JPanel();
@@ -70,7 +75,7 @@ public class Index extends javax.swing.JFrame {
         weightForm = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         serviceForm = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        createOrderBtn = new javax.swing.JButton();
         orderPnl = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
@@ -81,7 +86,7 @@ public class Index extends javax.swing.JFrame {
         customerField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        finishOrderBtn = new javax.swing.JButton();
         servicePnl = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
@@ -110,8 +115,10 @@ public class Index extends javax.swing.JFrame {
         addOrderBtn.setContentAreaFilled(false);
         addOrderBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addOrderBtn.setPreferredSize(new java.awt.Dimension(73, 40));
-        addOrderBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addOrderBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addOrderBtnActionPerformed(evt);
             }
         });
@@ -127,8 +134,10 @@ public class Index extends javax.swing.JFrame {
         serviceBtn.setBorder(null);
         serviceBtn.setContentAreaFilled(false);
         serviceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        serviceBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        serviceBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 serviceBtnActionPerformed(evt);
             }
         });
@@ -142,8 +151,10 @@ public class Index extends javax.swing.JFrame {
         editOrderBtn.setContentAreaFilled(false);
         editOrderBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editOrderBtn.setPreferredSize(new java.awt.Dimension(71, 40));
-        editOrderBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        editOrderBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 editOrderBtnActionPerformed(evt);
             }
         });
@@ -154,8 +165,10 @@ public class Index extends javax.swing.JFrame {
         logoutBtn.setText("Logout");
         logoutBtn.setBorder(null);
         logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        logoutBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 logoutBtnActionPerformed(evt);
             }
         });
@@ -236,10 +249,17 @@ public class Index extends javax.swing.JFrame {
         serviceForm.setForeground(new java.awt.Color(0, 0, 0));
         serviceForm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setBackground(new java.awt.Color(137, 128, 245));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add");
+        createOrderBtn.setBackground(new java.awt.Color(137, 128, 245));
+        createOrderBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        createOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
+        createOrderBtn.setText("Add");
+        createOrderBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                createOrderBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addOrderPnlLayout = new javax.swing.GroupLayout(addOrderPnl);
         addOrderPnl.setLayout(addOrderPnlLayout);
@@ -249,7 +269,7 @@ public class Index extends javax.swing.JFrame {
             .addGroup(addOrderPnlLayout.createSequentialGroup()
                 .addGap(177, 177, 177)
                 .addGroup(addOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(createOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(addOrderPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel5)
                         .addComponent(nameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,7 +296,7 @@ public class Index extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(serviceForm, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 104, Short.MAX_VALUE))
         );
 
@@ -298,18 +318,22 @@ public class Index extends javax.swing.JFrame {
         orderTable.setBackground(new java.awt.Color(249, 249, 249));
         orderTable.setForeground(new java.awt.Color(0, 0, 0));
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Transaction Date", "Finished Date", "Customer", "Employee", "Total Price", "Quantity", "Service"
             }
         ));
-        orderTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        orderTable.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 orderTableMouseClicked(evt);
             }
         });
@@ -329,11 +353,25 @@ public class Index extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Customer Name");
 
-        jButton2.setBackground(new java.awt.Color(137, 128, 245));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Finish");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        finishOrderBtn.setBackground(new java.awt.Color(137, 128, 245));
+        finishOrderBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        finishOrderBtn.setForeground(new java.awt.Color(255, 255, 255));
+        finishOrderBtn.setText("Finish");
+        finishOrderBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        finishOrderBtn.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                finishOrderBtnMouseClicked(evt);
+            }
+        });
+        finishOrderBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                finishOrderBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -350,7 +388,7 @@ public class Index extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(finishOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -369,7 +407,7 @@ public class Index extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(customerField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(finishOrderBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 37, Short.MAX_VALUE))
         );
 
@@ -403,13 +441,15 @@ public class Index extends javax.swing.JFrame {
         serviceTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         serviceTable.setForeground(new java.awt.Color(0, 0, 0));
         serviceTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Name", "Price"
             }
         ));
@@ -420,8 +460,10 @@ public class Index extends javax.swing.JFrame {
         serviceTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         serviceTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         serviceTable.setShowHorizontalLines(true);
-        serviceTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        serviceTable.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 serviceTableMouseClicked(evt);
             }
         });
@@ -431,8 +473,10 @@ public class Index extends javax.swing.JFrame {
         addServiceBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         addServiceBtn.setForeground(new java.awt.Color(255, 255, 255));
         addServiceBtn.setText("Add Service");
-        addServiceBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addServiceBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addServiceBtnActionPerformed(evt);
             }
         });
@@ -455,8 +499,10 @@ public class Index extends javax.swing.JFrame {
         editServiceBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         editServiceBtn.setForeground(new java.awt.Color(255, 255, 255));
         editServiceBtn.setText("Edit Service");
-        editServiceBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        editServiceBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 editServiceBtnActionPerformed(evt);
             }
         });
@@ -467,8 +513,10 @@ public class Index extends javax.swing.JFrame {
         refreshServiceBtn.setText("Refresh table");
         refreshServiceBtn.setBorderPainted(false);
         refreshServiceBtn.setContentAreaFilled(false);
-        refreshServiceBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        refreshServiceBtn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 refreshServiceBtnActionPerformed(evt);
             }
         });
@@ -560,6 +608,8 @@ public class Index extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderBtnActionPerformed
+        OrderController.populateList(serviceForm);
+        
         cardLayout.show(mainContent, "addOrderPnl");
     }//GEN-LAST:event_addOrderBtnActionPerformed
     
@@ -579,6 +629,13 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_serviceBtnActionPerformed
     
     private void editOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editOrderBtnActionPerformed
+        String[] header = {"Transaction Date", "Finished Date", "Customer", "Employee", "Total Price", "Quantity", "Service"};
+        
+        tableModel = new DefaultTableModel(rowData, header);
+        orderTable.setModel(tableModel);
+        
+        OrderController.index(tableModel);
+        
         cardLayout.show(mainContent, "orderPnl");
     }//GEN-LAST:event_editOrderBtnActionPerformed
     
@@ -596,6 +653,11 @@ public class Index extends javax.swing.JFrame {
     private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
         // TODO add your handling code here:
         int row = orderTable.getSelectedRow();
+        
+        OrderData selectedData = OrderController.getListOrderData().get(row);
+        
+        transactionDateField.setText(selectedData.getTanggalTransaksi());
+        customerField.setText(selectedData.getCustomerName());
     }//GEN-LAST:event_orderTableMouseClicked
     
     private void serviceTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serviceTableMouseClicked
@@ -623,6 +685,37 @@ public class Index extends javax.swing.JFrame {
         // TODO add your handling code here:
         ServiceController.refresh(tableModel);
     }//GEN-LAST:event_refreshServiceBtnActionPerformed
+
+    private void createOrderBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_createOrderBtnActionPerformed
+    {//GEN-HEADEREND:event_createOrderBtnActionPerformed
+        OrderController.store(
+                this, 
+                nameForm.getText(), 
+                weightForm.getText(), 
+                serviceForm.getSelectedIndex() + 1, 
+                currentKaryawan
+        );
+        
+        nameForm.setText("");
+        weightForm.setText("");
+    }//GEN-LAST:event_createOrderBtnActionPerformed
+
+    private void finishOrderBtnMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_finishOrderBtnMouseClicked
+    {//GEN-HEADEREND:event_finishOrderBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_finishOrderBtnMouseClicked
+
+    private void finishOrderBtnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_finishOrderBtnActionPerformed
+    {//GEN-HEADEREND:event_finishOrderBtnActionPerformed
+        int row = orderTable.getSelectedRow();
+        
+        OrderData selectedData = OrderController.getListOrderData().get(row);
+        
+        OrderController.update(this, selectedData.getId(), tableModel);
+        
+        transactionDateField.setText("");
+        customerField.setText("");
+    }//GEN-LAST:event_finishOrderBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -663,11 +756,11 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JButton addOrderBtn;
     private javax.swing.JPanel addOrderPnl;
     private javax.swing.JButton addServiceBtn;
+    private javax.swing.JButton createOrderBtn;
     private javax.swing.JTextField customerField;
     private javax.swing.JButton editOrderBtn;
     private javax.swing.JButton editServiceBtn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton finishOrderBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

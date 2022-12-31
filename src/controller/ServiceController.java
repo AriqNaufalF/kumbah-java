@@ -19,7 +19,7 @@ import model.Layanan;
 public class ServiceController extends Controller {
     
     private static Connection conn;
-    private static final ArrayList<Layanan> listLayanan = new ArrayList<>();
+    private static ArrayList<Layanan> listLayanan = new ArrayList<>();
     
     public static void index(DefaultTableModel tableModel) {
         loadLayanan(tableModel);

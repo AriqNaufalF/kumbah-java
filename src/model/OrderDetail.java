@@ -8,16 +8,16 @@ package model;
  *
  * @author pamun
  */
-public class OrderDetail
+public class OrderDetail extends Order
 {
-    protected int orderId, idLayanan;
+    protected int orderId;
     protected long totalHarga;
     protected int kuantitas;
 
-    public OrderDetail(int orderId, int idLayanan, long totalHarga, int kuantitas)
+    public OrderDetail(int orderId, long totalHarga, int kuantitas, int id, int idKaryawan, int idLayanan, String tanggalTransaksi, String tanggalSelesai, String customerName)
     {
+        super(id, idKaryawan, idLayanan, tanggalTransaksi, tanggalSelesai, customerName);
         this.orderId = orderId;
-        this.idLayanan = idLayanan;
         this.totalHarga = totalHarga;
         this.kuantitas = kuantitas;
     }
@@ -25,11 +25,6 @@ public class OrderDetail
     public int getOrderId()
     {
         return orderId;
-    }
-
-    public int getIdLayanan()
-    {
-        return idLayanan;
     }
 
     public long getTotalHarga()
@@ -45,11 +40,6 @@ public class OrderDetail
     public void setOrderId(int orderId)
     {
         this.orderId = orderId;
-    }
-
-    public void setIdLayanan(int idLayanan)
-    {
-        this.idLayanan = idLayanan;
     }
 
     public void setTotalHarga(long totalHarga)

@@ -236,7 +236,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jButton1" min="-2" pref="86" max="-2" attributes="0"/>
+                              <Component id="createOrderBtn" min="-2" pref="86" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="nameForm" alignment="0" min="-2" pref="448" max="-2" attributes="0"/>
@@ -267,7 +267,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="serviceForm" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="33" max="-2" attributes="0"/>
+                          <Component id="createOrderBtn" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="104" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -404,7 +404,7 @@
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="createOrderBtn">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f5" green="80" red="89" type="rgb"/>
@@ -417,6 +417,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Add"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createOrderBtnActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -479,7 +482,7 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="customerField" min="-2" pref="300" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jButton2" min="-2" pref="147" max="-2" attributes="0"/>
+                                              <Component id="finishOrderBtn" min="-2" pref="147" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jScrollPane1" alignment="0" min="-2" pref="745" max="-2" attributes="0"/>
                                       </Group>
@@ -503,7 +506,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="customerField" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                                      <Component id="jButton2" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="finishOrderBtn" alignment="3" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="37" max="32767" attributes="0"/>
                               </Group>
@@ -644,7 +647,7 @@
                             <Property name="text" type="java.lang.String" value="Customer Name"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton2">
+                        <Component class="javax.swing.JButton" name="finishOrderBtn">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="f5" green="80" red="89" type="rgb"/>
@@ -660,6 +663,10 @@
                               <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="finishOrderBtnMouseClicked"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="finishOrderBtnActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
